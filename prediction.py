@@ -22,3 +22,7 @@ backup=car.copy()
 car=car[car['year'].str.isnumeric()]
 car['year']=car['year'].astype(int)
 car=car[car['Price']!='Ask For Price']
+car['Price']=car['Price'].str.replace(',','').astype(int)
+car['km_driven']=car['km_driven'].str.split(' ').str.get(0).str.replace(',','')
+car=car[car['km_driven'].str.isnumeric()]
+car['km_driven']=car['km_driven'].astype(int)
