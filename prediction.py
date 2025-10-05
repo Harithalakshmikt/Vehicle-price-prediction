@@ -16,6 +16,7 @@ print(car['kms_driven'].unique())
 4. price has some invalid values like ask for price,and commas in between the digits
 5.kms_driven has to convert into int
 6.kms_driven has some commas in between the digits
+7.name should have three words
 """
 #Cleaning the data
 backup=car.copy()
@@ -26,3 +27,8 @@ car['Price']=car['Price'].str.replace(',','').astype(int)
 car['km_driven']=car['km_driven'].str.split(' ').str.get(0).str.replace(',','')
 car=car[car['km_driven'].str.isnumeric()]
 car['km_driven']=car['km_driven'].astype(int)
+car=car[~car['fuel_type'].str.isna()]
+car['name']= car['name'].str.split(' ').str.slice[0:3].str.join(' ')
+car=car.reset_index(drop=True)
+car.info()
+car = car[car['price']<6e6].reset_index(drop=True)
