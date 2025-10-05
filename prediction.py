@@ -17,6 +17,7 @@ print(car['kms_driven'].unique())
 5.kms_driven has to convert into int
 6.kms_driven has some commas in between the digits
 7.name should have three words
+8.one outlier in price
 """
 #Cleaning the data
 backup=car.copy()
@@ -32,3 +33,8 @@ car['name']= car['name'].str.split(' ').str.slice[0:3].str.join(' ')
 car=car.reset_index(drop=True)
 car.info()
 car = car[car['price']<6e6].reset_index(drop=True)
+car.to_csv("cleaned_car.csv")
+
+#Model
+x=car.drop(columns = 'Price')
+y=car['Price']
