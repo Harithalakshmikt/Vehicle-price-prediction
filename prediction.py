@@ -25,14 +25,14 @@ car=car[car['year'].str.isnumeric()]
 car['year']=car['year'].astype(int)
 car=car[car['Price']!='Ask For Price']
 car['Price']=car['Price'].str.replace(',','').astype(int)
-car['km_driven']=car['km_driven'].str.split(' ').str.get(0).str.replace(',','')
-car=car[car['km_driven'].str.isnumeric()]
-car['km_driven']=car['km_driven'].astype(int)
-car=car[~car['fuel_type'].str.isna()]
-car['name']= car['name'].str.split(' ').str.slice[0:3].str.join(' ')
+car['kms_driven']=car['kms_driven'].str.split(' ').str.get(0).str.replace(',','')
+car=car[car['kms_driven'].str.isnumeric()]
+car['kms_driven']=car['kms_driven'].astype(int)
+car=car[~car['fuel_type'].isna()]
+car['name']= car['name'].str.split(' ').str.slice(0,3).str.join(' ')
 car=car.reset_index(drop=True)
 car.info()
-car = car[car['price']<6e6].reset_index(drop=True)
+car = car[car['Price']<6e6].reset_index(drop=True)
 car.to_csv("cleaned_car.csv")
 
 #Model
@@ -41,7 +41,7 @@ y=car['Price']
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2 score
+from sklearn.metrics import r2_score
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import make_column_transformer
@@ -50,23 +50,28 @@ from sklearn.pipeline import make_pipeline
 ohe = OneHotEncoder()
 ohe.fit(X[['name','company','fuel_type']])
 scores=[]
-colum_trans=make_column_transformer((OneHotEncode(categories= ohe.categories_),['name','company','fuel_type']),remainder='passthrough')
+column_trans=make_column_transformer((OneHotEncoder(categories= ohe.categories_),['name','company','fuel_type']),remainder='passthrough')
 
-
-for i in range 1000:
-    X_train,X_test,y_train,y_test =           train_test_split(X,y,test_size = .2,random_state = i)
+#Try different random state
+for i in range (1000):
+    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = .2,random_state = i)
     lr = LinearRegression ()
-    pipe = make_pipeline(lr,column_trans)
+    pipe = make_pipeline(column_trans,lr)
     pipe.fit(X_train,y_train)
-    y_pred = predict(X_test)
+    y_pred = pipe.predict(X_test)
     scores.append(r2_score(y_pred,y_test))
 
-print(np.argmax(scores))
-print(scores[np.argmax(scores)]
+#Best score and corresponding seed
+print("Best random state =", np.argmax(scores))
+print("Best R2_score = ", scores[np.argmax(scores)])
 
-X_train,X_test,y_train,y_test =           train_test_split(X,y,test_size = .2,random_state = np.argmax(scores))
+#Fiting the best seed
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = .2,random_state = np.argmax(scores))
 lr = LinearRegression ()
-pipe = make_pipeline(lr,column_trans)
+pipe = make_pipeline(column_trans,lr)
 pipe.fit(X_train,y_train)
-y_pred = predict(X_test)
-scores.append(r2_score(y_pred,y_test))
+y_pred = pipe.predict(X_test)
+print("Final best score = ",r2_score(y_pred,y_test))
+
+import pickle
+pickle.dump(pipe,open('LinearRegressionModel.pkl','wb'))
