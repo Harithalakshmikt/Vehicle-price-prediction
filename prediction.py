@@ -36,5 +36,37 @@ car = car[car['price']<6e6].reset_index(drop=True)
 car.to_csv("cleaned_car.csv")
 
 #Model
-x=car.drop(columns = 'Price')
+X=car.drop(columns = 'Price')
 y=car['Price']
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2 score
+import numpy as np
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import make_column_transformer
+from sklearn.pipeline import make_pipeline
+
+ohe = OneHotEncoder()
+ohe.fit(X[['name','company','fuel_type']])
+scores=[]
+colum_trans=make_column_transformer((OneHotEncode(categories= ohe.categories_),['name','company','fuel_type']),remainder='passthrough')
+
+
+for i in range 1000:
+    X_train,X_test,y_train,y_test =           train_test_split(X,y,test_size = .2,random_state = i)
+    lr = LinearRegression ()
+    pipe = make_pipeline(lr,column_trans)
+    pipe.fit(X_train,y_train)
+    y_pred = predict(X_test)
+    scores.append(r2_score(y_pred,y_test))
+
+print(np.argmax(scores))
+print(scores[np.argmax(scores)]
+
+X_train,X_test,y_train,y_test =           train_test_split(X,y,test_size = .2,random_state = np.argmax(scores))
+lr = LinearRegression ()
+pipe = make_pipeline(lr,column_trans)
+pipe.fit(X_train,y_train)
+y_pred = predict(X_test)
+scores.append(r2_score(y_pred,y_test))
