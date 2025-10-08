@@ -1,25 +1,48 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Price Prediction</title>
+</head>
+<body>
+    <h2>Car Price Prediction</h2>
 
-<link rel = "stylesheet" href = "static/css/style.css"
+    <form action="/predict" method="post">
+        <label>Company:</label><br>
+        <select name="company">
+            {% for comp in companies %}
+            <option value="{{ comp }}">{{ comp }}</option>
+            {% endfor %}
+        </select><br><br>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <label>Car Model:</label><br>
+        <select name="car_model">
+            {% for model in car_models %}
+            <option value="{{ model }}">{{ model }}</option>
+            {% endfor %}
+        </select><br><br>
 
-    <title>Car Price Predictor</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
+        <label>Year:</label><br>
+        <select name="year">
+            {% for y in years %}
+            <option value="{{ y }}">{{ y }}</option>
+            {% endfor %}
+        </select><br><br>
 
-    
+        <label>Fuel Type:</label><br>
+        <select name="fuel_type">
+            {% for fuel in fuel_types %}
+            <option value="{{ fuel }}">{{ fuel }}</option>
+            {% endfor %}
+        </select><br><br>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    
-  </body>
+        <label>Kilometers Driven:</label><br>
+        <input type="text" name="kms_driven" required><br><br>
+
+        <input type="submit" value="Predict Price">
+    </form>
+
+    {% if prediction_text %}
+    <h3>{{ prediction_text }}</h3>
+    {% endif %}
+</body>
 </html>
