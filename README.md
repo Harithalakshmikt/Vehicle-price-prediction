@@ -3,6 +3,7 @@
 A Flask-based web application that predicts the price of used cars based on features like company, model, year, kilometers driven, and fuel type using a trained Linear Regression model.
 
 📂 Project Structure
+```text
 Vehicle-price-prediction/
 ├── app.py                     # Flask application
 ├── cleaned_car.csv            # Cleaned dataset
@@ -10,7 +11,7 @@ Vehicle-price-prediction/
 ├── templates/
 │   └── index.html             # HTML form for user input
 └── README.md                  # Project documentation
-
+```
 ⚙️ Features
 
 Predicts car prices using a trained ML model.
