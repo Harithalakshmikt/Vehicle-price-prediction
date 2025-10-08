@@ -1,8 +1,8 @@
-🚗 Car Price Prediction Web App
+# 🚗 Car Price Prediction Web App
 
 A Flask-based web application that predicts the price of used cars based on features like company, model, year, kilometers driven, and fuel type using a trained Linear Regression model.
 
-📂 Project Structure
+## 📂 Project Structure
 ```text
 Vehicle-price-prediction/
 ├── app.py                     # Flask application
