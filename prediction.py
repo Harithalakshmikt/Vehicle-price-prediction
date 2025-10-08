@@ -59,7 +59,7 @@ for i in range (1000):
     pipe = make_pipeline(column_trans,lr)
     pipe.fit(X_train,y_train)
     y_pred = pipe.predict(X_test)
-    scores.append(r2_score(y_pred,y_test))
+    scores.append(r2_score(y_test,y_pred))
 
 #Best score and corresponding seed
 print("Best random state =", np.argmax(scores))
@@ -71,7 +71,11 @@ lr = LinearRegression ()
 pipe = make_pipeline(column_trans,lr)
 pipe.fit(X_train,y_train)
 y_pred = pipe.predict(X_test)
-print("Final best score = ",r2_score(y_pred,y_test))
+print("Final best score = ",r2_score(y_test,y_pred))
 
+test_data = X_test.head().copy()
+test_data["actual_price"] = y_test.head().values
+print(test_data)
+test_data.to_csv("sample data.csv", index=False)
 import pickle
 pickle.dump(pipe,open('LinearRegressionModel.pkl','wb'))
