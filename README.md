@@ -12,7 +12,7 @@ Vehicle-price-prediction/
 │   └── index.html             # HTML form for user input
 └── README.md                  # Project documentation
 ```
-⚙️ Features
+## ⚙️ Features
 
 Predicts car prices using a trained ML model.
 
@@ -30,7 +30,7 @@ Handling missing fuel types
 
 Removing extreme outliers
 
-🛠 Technologies Used
+## 🛠 Technologies Used
 
 Python 3
 
@@ -42,28 +42,28 @@ Scikit-learn – Linear Regression & One-Hot Encoding
 
 Pickle – model serialization
 
-🏃 How to Run Locally
+## 🏃 How to Run Locally
 
-Clone the repository: 
+### Clone the repository: 
 git clone https://github.com/Harithalakshmikt/Vehicle-price-prediction.git
 cd Vehicle-price-prediction
 
 
-Install dependencies:
+### Install dependencies:
 pip install flask pandas scikit-learn
 
 
-Run the Flask app:
+### Run the Flask app:
 python app.py
 
 
-Open the app in your browser:
+### Open the app in your browser:
 http://127.0.0.1:5000
 
 If running in GitHub Codespaces, use the Port Preview feature.
 
 
-🔹 Usage
+##🔹 Usage
 
 Select the car company and model.
 
@@ -73,7 +73,7 @@ Click Predict Price.
 
 The app will display the estimated price of the car.
 
-📈Model Details
+## 📈Model Details
 
 Algorithm: Linear Regression
 
@@ -83,13 +83,13 @@ Target: Price
 
 Evaluation: R² score tested on 20% of dataset
 
-⚡ Notes
+## ⚡ Notes
 
 Currently, the app is tested in GitHub Codespaces.
 
 Public deployment URL can be added later using platforms like Render, AWS EC2, or Streamlit Cloud.
 
-📝 Author
+## 📝 Author
 
 Haritha Lakshmi K.T
 
