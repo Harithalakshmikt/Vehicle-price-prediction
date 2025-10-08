@@ -63,7 +63,7 @@ http://127.0.0.1:5000
 If running in GitHub Codespaces, use the Port Preview feature.
 
 
-##🔹 Usage
+## 🔹 Usage
 
 Select the car company and model.
 
