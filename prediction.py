@@ -49,8 +49,8 @@ from sklearn.pipeline import make_pipeline
 
 ohe = OneHotEncoder()
 ohe.fit(X[['name','company','fuel_type']])
-scores=[]
 column_trans=make_column_transformer((OneHotEncoder(categories= ohe.categories_),['name','company','fuel_type']),remainder='passthrough')
+scores=[]
 
 #Try different random state
 for i in range (1000):
